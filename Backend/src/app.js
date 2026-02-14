@@ -9,6 +9,8 @@ const authRouter = require("./routes/auth.routes");
 const categoryRouter = require("./routes/category.routes");
 const bookingRouter = require("./routes/booking.routes");
 const userRouter = require("./routes/user.routes");
+const influencerRouter = require("./routes/influencer.routes");
+const adminRouter = require("./routes/admin.routes");
 
 app.use(
   cors({
@@ -42,6 +44,8 @@ app.use("/api/auth", authRouter);
 app.use("/api/categories", categoryRouter);
 app.use("/api/bookings", bookingRouter);
 app.use("/api/users", userRouter);
+app.use("/api/influencer", influencerRouter);
+app.use("/api/admin", adminRouter);
 
 app.get("/", (req, res) => {
   res.send("InfluEra Backend is up and running!✨");
