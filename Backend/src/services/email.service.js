@@ -92,62 +92,54 @@ The InfluEra Team`;
   return await sendEmail(userEmail, subject, text, html);
 };
 
-// ==============================
-// 💰 Transaction Success Email
-// ==============================
+/* ==============================
+   BOOKING EMAILS
+============================== */
 
-const sendTransactionEmail = async (userEmail, name, amount, toAccount) => {
-  const subject = "Transaction Successful!";
-  const text = `Hello ${name},
-
-Your transaction of $${amount} to account ${toAccount} was successful.
-
-Best regards,
-The InfluEra Team`;
-
-  const html = `
-    <h2>Transaction Successful ✅</h2>
-    <p>Hello ${name},</p>
-    <p>Your transaction of <strong>$${amount}</strong> to account 
-    <strong>${toAccount}</strong> was successful.</p>
-    <br/>
-    <p>Best regards,<br/>The InfluEra Team</p>
-  `;
-
-  return await sendEmail(userEmail, subject, text, html);
+const sendBookingCreatedEmail = async (
+  influencerEmail,
+  influencerName,
+  userName,
+  date
+) => {
+  await sendEmail(
+    influencerEmail,
+    "New Booking Request",
+    `
+      <h2>Hello ${influencerName}</h2>
+      <p>You received a new booking request from <b>${userName}</b>.</p>
+      <p><b>Date:</b> ${new Date(date).toLocaleString()}</p>
+    `
+  );
 };
 
-// ==============================
-// ❌ Transaction Failure Email
-// ==============================
+const sendBookingConfirmedEmail = async (userEmail, userName, date) => {
+  await sendEmail(
+    userEmail,
+    "Booking Confirmed",
+    `
+      <h2>Hello ${userName}</h2>
+      <p>Your booking has been <b>CONFIRMED</b>.</p>
+      <p><b>Date:</b> ${new Date(date).toLocaleString()}</p>
+    `
+  );
+};
 
-const sendTransactionFailureEmail = async (
-  userEmail,
-  name,
-  amount,
-  toAccount
+const sendBookingCancelledEmail = async (
+  influencerEmail,
+  influencerName,
+  date
 ) => {
-  const subject = "Transaction Failed";
-  const text = `Hello ${name},
-
-We regret to inform you that your transaction of $${amount} to account ${toAccount} has failed.
-
-Please try again later.
-
-Best regards,
-The InfluEra Team`;
-
-  const html = `
-    <h2>Transaction Failed ❌</h2>
-    <p>Hello ${name},</p>
-    <p>Your transaction of <strong>$${amount}</strong> to account 
-    <strong>${toAccount}</strong> has failed.</p>
-    <p>Please try again later.</p>
-    <br/>
-    <p>Best regards,<br/>The InfluEra Team</p>
-  `;
-
-  return await sendEmail(userEmail, subject, text, html);
+  await sendEmail(
+    influencerEmail,
+    "Booking Cancelled",
+    `
+      <h2>Hello ${influencerName}</h2>
+      <p>The booking scheduled on <b>${new Date(
+        date
+      ).toLocaleString()}</b> has been cancelled by the user.</p>
+    `
+  );
 };
 
 // ==============================
@@ -156,6 +148,7 @@ The InfluEra Team`;
 
 module.exports = {
   sendRegistrationEmail,
-  sendTransactionEmail,
-  sendTransactionFailureEmail,
+  sendBookingCreatedEmail,
+  sendBookingConfirmedEmail,
+  sendBookingCancelledEmail,
 };
