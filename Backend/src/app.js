@@ -6,6 +6,7 @@ const cors = require("cors");
 const session = require("express-session");
 
 const authRouter = require("./routes/auth.routes");
+const categoryRouter = require("./routes/category.routes");
 
 app.use(
   cors({
@@ -36,6 +37,7 @@ app.use(
 );
 
 app.use("/api/auth", authRouter);
+app.use("/api/categories", categoryRouter);
 
 app.get("/", (req, res) => {
   res.send("InfluEra Backend is up and running!✨");
