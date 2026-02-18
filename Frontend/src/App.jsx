@@ -1,11 +1,20 @@
-import React from 'react'
+import Routing from "./routes/Routing";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchProfile } from "./features/auth/AuthActions";
 
 const App = () => {
-  return (
-    <div className='w-full h-screen text-2xl flex items-center justify-center'>
-      Welcome To InfluEra Frontend!...✨
-    </div>
-  )
-}
+  const dispatch = useDispatch();
 
-export default App
+  useEffect(() => {
+    dispatch(fetchProfile());
+  }, [dispatch]);
+
+  return (
+    <>
+      <Routing />
+    </>
+  );
+};
+
+export default App;
