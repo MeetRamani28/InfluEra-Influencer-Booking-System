@@ -1,4 +1,5 @@
 const Booking = require("../model/booking.model");
+const User = require("../model/user.model");
 
 /**
  * =========================================
@@ -55,6 +56,40 @@ const getInfluencerDashboardStats = async (req, res) => {
   }
 };
 
+/**
+ * =========================================
+ * GET ALL ACTIVE INFLUENCERS
+ * GET /api/influencers
+ * ROLE: USER
+ * =========================================
+ */
+const getAllInfluencers = async (req, res) => {
+  try {
+    // Fetch all users with role INFLUENCER and isActive true
+    const influencers = await User.find({
+      role: "INFLUENCER",
+      "influencerProfile.isActive": true,
+    })
+      .populate("influencerProfile.category", "name") // populate category name
+      .select(
+        "fullName email influencerProfile createdAt" // select required fields
+      );
+
+    return res.status(200).json({
+      success: true,
+      influencers,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Error fetching influencers",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   getInfluencerDashboardStats,
+  getAllInfluencers,
 };

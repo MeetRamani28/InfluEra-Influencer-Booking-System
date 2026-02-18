@@ -7,7 +7,6 @@ const PublicRoute = ({ children }) => {
     (state) => state.auth
   );
 
-  // Wait for auth check
   if (isCheckingAuth) {
     return (
       <Box display="flex" justifyContent="center" mt={10}>
@@ -16,7 +15,6 @@ const PublicRoute = ({ children }) => {
     );
   }
 
-  // 🔥 If already logged in → redirect by role
   if (isAuthenticated) {
     switch (user?.role) {
       case "ADMIN":

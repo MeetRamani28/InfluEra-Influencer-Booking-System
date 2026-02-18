@@ -9,4 +9,6 @@ router.get(
   influencerController.getInfluencerDashboardStats
 );
 
+router.get("/", authMiddleware("USER"), influencerController.getAllInfluencers);
+
 module.exports = router;
