@@ -7,11 +7,14 @@ import {
 // Fetch Influencer Dashboard Stats
 export const fetchInfluencerDashboard = createAsyncThunk(
   "influencer/dashboard",
-  async (_, { rejectWithValue }) => {
+  async (_, thunkAPI) => {
     try {
-      return await fetchInfluencerDashboardAPI();
-    } catch (error) {
-      return rejectWithValue(error.response?.data?.message);
+      const res = await fetchInfluencerDashboardAPI();
+      return res.data; // ✅ FIXED
+    } catch (err) {
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.message || "Failed to fetch dashboard"
+      );
     }
   }
 );

@@ -38,6 +38,20 @@ const getInfluencerDashboardStats = async (req, res) => {
       isActive: true,
     });
 
+    const todayStart = new Date();
+    todayStart.setHours(0, 0, 0, 0);
+
+    const todayEnd = new Date();
+    todayEnd.setHours(23, 59, 59, 999);
+
+    const todayAppointments = await Booking.find({
+      influencer: influencerId,
+      appointmentDate: { $gte: todayStart, $lte: todayEnd },
+      isActive: true,
+    })
+      .populate("user", "fullName")
+      .populate("influencer", "fullName");
+
     return res.status(200).json({
       success: true,
       data: {
@@ -45,6 +59,7 @@ const getInfluencerDashboardStats = async (req, res) => {
         upcomingBookings,
         cancelledBookings,
         completedBookings,
+        todayAppointments
       },
     });
   } catch (error) {

@@ -11,6 +11,8 @@ import HomePage from "../pages/user/Home";
 import InfluencerDashboard from "../pages/influencer/Dashboard";
 
 import UserLayout from "../layouts/UserLayout";
+import AdminLayout from "../layouts/AdminLayout";
+import InfluencerLayout from "../layouts/InfluencerLayout";
 
 // import missing pages
 import Services from "../pages/user/Services";
@@ -51,10 +53,12 @@ const Routing = () => {
         path="/admin"
         element={
           <PrivateRoute role="ADMIN">
-            <AdminDashboard />
+            <AdminLayout />
           </PrivateRoute>
         }
-      />
+      >
+        <Route index element={<AdminDashboard />} />
+      </Route>
 
       {/* User Section with Nested Routes */}
       <Route
@@ -78,10 +82,12 @@ const Routing = () => {
         path="/influencer"
         element={
           <PrivateRoute role="INFLUENCER">
-            <InfluencerDashboard />
+            <InfluencerLayout />
           </PrivateRoute>
         }
-      />
+      >
+        <Route index element={<InfluencerDashboard />} />
+      </Route>
     </Routes>
   );
 };

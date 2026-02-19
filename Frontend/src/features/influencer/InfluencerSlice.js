@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   fetchInfluencerDashboard,
   fetchAllInfluencers,
-} from "./influencerActions";
+} from "./InfluencerActions";
 
 const initialState = {
   stats: {
@@ -38,7 +38,7 @@ const influencerSlice = createSlice({
       })
       .addCase(fetchInfluencerDashboard.fulfilled, (state, action) => {
         state.loadingStats = false;
-        state.stats = action.payload.data;
+        state.stats = action.payload;
       })
       .addCase(fetchInfluencerDashboard.rejected, (state, action) => {
         state.loadingStats = false;

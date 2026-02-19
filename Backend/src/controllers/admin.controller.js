@@ -29,6 +29,14 @@ const getAdminDashboardStats = async (req, res) => {
       isActive: true,
     });
 
+    const todayAppointments = await Booking.find({
+      appointmentDate: { $gte: startOfToday, $lte: endOfToday },
+      isActive: true,
+    })
+      .populate("user", "fullName email")
+      .populate("influencer", "fullName email")
+      .sort({ appointmentDate: -1 });
+
     const confirmedToday = await Booking.countDocuments({
       appointmentDate: { $gte: startOfToday, $lte: endOfToday },
       status: "CONFIRMED",
@@ -56,6 +64,7 @@ const getAdminDashboardStats = async (req, res) => {
         confirmedToday,
         pendingToday,
         cancelledToday,
+        todayAppointments,
       },
     });
   } catch (error) {
