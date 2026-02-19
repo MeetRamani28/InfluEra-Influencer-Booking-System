@@ -18,14 +18,14 @@ export const createBooking = createAsyncThunk(
 
 // GET MY BOOKINGS (USER)
 export const getMyBookings = createAsyncThunk(
-  "booking/getMy",
-  async (_, { rejectWithValue }) => {
+  "booking/fetchMyBookings",
+  async (_, thunkAPI) => {
     try {
-      const { data } = await bookingApi.getMyBookingsApi();
-      return data;
-    } catch (error) {
-      return rejectWithValue(
-        error.response?.data?.message || "Failed to Fetch My Bookings"
+      const res = await bookingApi.getMyBookingsApi();
+      return res.data;   // ✅ return full object
+    } catch (err) {
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.message || "Failed to fetch bookings"
       );
     }
   }

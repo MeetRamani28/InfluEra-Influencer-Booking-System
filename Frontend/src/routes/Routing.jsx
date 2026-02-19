@@ -18,12 +18,14 @@ import Blogs from "../pages/user/Blogs";
 import AboutUs from "../pages/user/AboutUs";
 import ContactUs from "../pages/user/ContactUs";
 import MyBookings from "../pages/user/MyBookings";
+import NotFound from "../pages/public/NotFound";
 
 const Routing = () => {
   return (
     <Routes>
       {/* Role Redirect */}
       <Route path="/" element={<RoleRedirect />} />
+      <Route path="*" element={<NotFound />} />
 
       {/* Public Routes */}
       <Route
