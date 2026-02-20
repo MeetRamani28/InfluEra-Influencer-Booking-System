@@ -6,6 +6,7 @@ const initialState = {
   loading: false,
   error: null,
   success: false,
+  count: 0, // optional: to store total bookings
 };
 
 const bookingSlice = createSlice({
@@ -31,7 +32,8 @@ const bookingSlice = createSlice({
       .addCase(actions.createBooking.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        state.bookings.push(action.payload.booking);
+        state.bookings.push(action.payload.booking); // API returns { booking: {...} }
+        state.count += 1;
       })
       .addCase(actions.createBooking.rejected, (state, action) => {
         state.loading = false;
@@ -39,18 +41,17 @@ const bookingSlice = createSlice({
       })
 
       // ==========================
-      // UPDATE BOOKING
+      // UPDATE BOOKING STATUS
       // ==========================
       .addCase(actions.updateBookingStatus.fulfilled, (state, action) => {
-        const updated = action.payload.booking;
-
+        const updatedBooking = action.payload.booking;
         state.bookings = state.bookings.map((b) =>
-          b._id === updated._id ? updated : b
+          b._id === updatedBooking._id ? updatedBooking : b
         );
       })
 
       // ==========================
-      // CANCEL BOOKING
+      // CANCEL BOOKING (USER)
       // ==========================
       .addCase(actions.cancelBooking.fulfilled, (state, action) => {
         state.bookings = state.bookings.map((b) =>
@@ -59,10 +60,13 @@ const bookingSlice = createSlice({
       })
 
       // ==========================
-      // DELETE BOOKING
+      // DELETE BOOKING (ADMIN)
       // ==========================
       .addCase(actions.deleteBooking.fulfilled, (state, action) => {
-        state.bookings = state.bookings.filter((b) => b._id !== action.payload);
+        state.bookings = state.bookings.filter(
+          (b) => b._id !== action.payload
+        );
+        state.count = state.bookings.length;
       })
 
       // ==========================
@@ -83,7 +87,9 @@ const bookingSlice = createSlice({
           action.type.endsWith("/fulfilled"),
         (state, action) => {
           state.loading = false;
-          state.bookings = action.payload.bookings;
+          // ✅ action.payload = { success, count, bookings }
+          state.bookings = action.payload.bookings || [];
+          state.count = action.payload.count || 0;
         }
       )
       .addMatcher(

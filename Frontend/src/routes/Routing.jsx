@@ -7,10 +7,14 @@ import Login from "../pages/public/Login";
 import Register from "../pages/public/Register";
 
 import AdminDashboard from "../pages/admin/Dashboard";
+import AdminBookings from "../pages/admin/Bookings";
+import AdminInfluencers from "../pages/admin/Influencers";
+import AdminUsers from "../pages/admin/Users";
+import AdminCategoies from "../pages/admin/Categories";
 import HomePage from "../pages/user/Home";
 import InfluencerDashboard from "../pages/influencer/Dashboard";
 import InfluencerBookings from "../pages/influencer/Bookings";
-import InfluencerProfile from "../pages/influencer/Profile"
+import InfluencerProfile from "../pages/influencer/Profile";
 
 import UserLayout from "../layouts/UserLayout";
 import AdminLayout from "../layouts/AdminLayout";
@@ -59,6 +63,10 @@ const Routing = () => {
         }
       >
         <Route index element={<AdminDashboard />} />
+        <Route path="bookings" element={<AdminBookings />} />
+        <Route path="influencers" element={<AdminInfluencers />} />
+        <Route path="users" element={<AdminUsers />} />
+        <Route path="categories" element={<AdminCategoies />} />
       </Route>
 
       {/* User Section with Nested Routes */}

@@ -5,7 +5,7 @@ import {
   createCategory,
   updateCategory,
   deleteCategory,
-} from "./categoryActions";
+} from "./CategoryActions";
 
 const initialState = {
   categories: [],

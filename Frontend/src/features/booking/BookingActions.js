@@ -33,14 +33,14 @@ export const getMyBookings = createAsyncThunk(
 
 // GET ALL BOOKINGS (ADMIN)
 export const getAllBookings = createAsyncThunk(
-  "booking/getAll",
+  "booking/fetchAll",
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await bookingApi.getAllBookingsApi();
-      return data;
+      return data; // ✅ returns { success, count, bookings }
     } catch (error) {
       return rejectWithValue(
-        error.response?.data?.message || "Failed to Fetch All Bookings"
+        error.response?.data?.message || "Failed to fetch bookings"
       );
     }
   }
