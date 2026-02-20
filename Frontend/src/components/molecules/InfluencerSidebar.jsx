@@ -14,12 +14,9 @@ import {
 } from "@mui/material";
 import {
   Dashboard,
-  People,
   CalendarMonth,
   Person,
-  Category,
   Menu as MenuIcon,
-  Notifications as Notification,
 } from "@mui/icons-material";
 import TrendingUp from "@mui/icons-material/TrendingUp";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -29,11 +26,6 @@ const drawerWidth = 260;
 const menuItems = [
   { text: "Dashboard", icon: <Dashboard />, path: "/influencer" },
   { text: "Bookings", icon: <CalendarMonth />, path: "/influencer/bookings" },
-  {
-    text: "Notifications",
-    icon: <Notification />,
-    path: "/influencer/notifications",
-  },
   { text: "Profile", icon: <Person />, path: "/influencer/profile" },
 ];
 

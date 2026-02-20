@@ -22,7 +22,7 @@ export const getMyBookings = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await bookingApi.getMyBookingsApi();
-      return res.data;   // ✅ return full object
+      return res.data; // ✅ return full object
     } catch (err) {
       return thunkAPI.rejectWithValue(
         err.response?.data?.message || "Failed to fetch bookings"
@@ -48,7 +48,7 @@ export const getAllBookings = createAsyncThunk(
 
 // GET INFLUENCER BOOKINGS
 export const getInfluencerBookings = createAsyncThunk(
-  "booking/getInfluencer",
+  "booking/fetchInfluencerBookings",
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await bookingApi.getInfluencerBookingsApi();
@@ -106,7 +106,7 @@ export const updateBookingStatus = createAsyncThunk(
   async ({ id, status }, { rejectWithValue }) => {
     try {
       const { data } = await bookingApi.updateBookingStatusApi(id, status);
-      return data;
+      return data; // contains { booking }
     } catch (error) {
       return rejectWithValue(
         error.response?.data?.message || "Status Update Failed"

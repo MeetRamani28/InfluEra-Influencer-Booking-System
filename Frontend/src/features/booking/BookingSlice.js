@@ -41,15 +41,9 @@ const bookingSlice = createSlice({
       // ==========================
       // UPDATE BOOKING
       // ==========================
-      .addCase(actions.updateBooking.fulfilled, (state, action) => {
-        const updated = action.payload.booking;
-        state.bookings = state.bookings.map((b) =>
-          b._id === updated._id ? updated : b
-        );
-      })
-
       .addCase(actions.updateBookingStatus.fulfilled, (state, action) => {
         const updated = action.payload.booking;
+
         state.bookings = state.bookings.map((b) =>
           b._id === updated._id ? updated : b
         );

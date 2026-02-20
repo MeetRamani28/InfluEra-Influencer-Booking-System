@@ -9,12 +9,13 @@ import Register from "../pages/public/Register";
 import AdminDashboard from "../pages/admin/Dashboard";
 import HomePage from "../pages/user/Home";
 import InfluencerDashboard from "../pages/influencer/Dashboard";
+import InfluencerBookings from "../pages/influencer/Bookings";
+import InfluencerProfile from "../pages/influencer/Profile"
 
 import UserLayout from "../layouts/UserLayout";
 import AdminLayout from "../layouts/AdminLayout";
 import InfluencerLayout from "../layouts/InfluencerLayout";
 
-// import missing pages
 import Services from "../pages/user/Services";
 import Blogs from "../pages/user/Blogs";
 import AboutUs from "../pages/user/AboutUs";
@@ -87,6 +88,8 @@ const Routing = () => {
         }
       >
         <Route index element={<InfluencerDashboard />} />
+        <Route path="bookings" element={<InfluencerBookings />} />
+        <Route path="profile" element={<InfluencerProfile />} />
       </Route>
     </Routes>
   );
